@@ -39,6 +39,8 @@
     .role p { margin:0; color:var(--muted); }
     .tags { display:flex; flex-wrap:wrap; gap:10px; }
     .tag { border:1px solid var(--line); border-radius:999px; padding:7px 13px; color:var(--muted); }
+    .easter-egg { opacity:.38; cursor:help; transition:opacity .2s ease; }
+    .easter-egg:hover { opacity:1; color:var(--accent); }
     footer { padding:32px 0 48px; color:var(--muted); display:flex; justify-content:space-between; gap:20px; }
     @media (max-width:700px) { .wrap { width:min(100% - 28px, 1080px); } nav .links { display:none; } .grid { grid-template-columns:1fr; } .role { grid-template-columns:1fr; gap:4px; } footer { display:block; } }
   </style>
@@ -94,7 +96,7 @@
       </section>
     </main>
 
-    <footer><span>© 2026 notHi3u</span><span>Designed for clarity · Built with HTML & CSS · Hosted on GitHub Pages, imirite?</span></footer>
+    <footer><span>© 2026 notHi3u</span><span>Designed for clarity · Built with HTML & CSS <span class="easter-egg" title="iykyk">· imirite?</span></span></footer>
   </div>
 </body>
 </html>
