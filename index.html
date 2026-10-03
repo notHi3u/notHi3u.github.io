@@ -365,17 +365,18 @@
     }
 
     .brand-rolling-pawn {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       position: absolute;
       bottom: 5.5px;
-      left: 14px; /* Center alignment datum */
+      left: 0;
       border-radius: 1px;
-      animation: pawnRollDiagramClockwise 3.2s cubic-bezier(0.22, 0.85, 0.25, 1) infinite;
+      animation: pawnRollContinuousRight 3.4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+      pointer-events: none;
     }
 
     .brand:hover .brand-rolling-pawn {
-      animation-duration: 1.8s;
+      animation-duration: 2s;
     }
 
     .pawn-core {
@@ -392,41 +393,47 @@
 
     .pawn-core::after {
       content: '';
-      width: 2.5px;
-      height: 2.5px;
+      width: 2px;
+      height: 2px;
       background: var(--bg);
       border-radius: 50%;
       transition: background 0.3s ease;
     }
 
     /*
-      HOẠT HỌA THEO ĐÚNG HÌNH VẼ USER:
-      - Hình 1: Nằm phẳng bên phải vạch tâm (rotate 0deg).
-      - Hình 2: Lật nghiêng 45 độ quanh góc dưới tiếp đất, nhô đỉnh cao lên, góc nhọn chạm vạch tâm.
-      - Hình 3: Đổ phẳng nằm hẳn sang bên trái vạch tâm (rotate -90deg).
-      - Chu kỳ lật ngược về nhịp nhàng tạo vòng lặp vô tận.
+      CONTINUOUS RIGHT-WARD CLOCKWISE ROLL:
+      - Rolls strictly left-to-right along the tactical ground line.
+      - 4 complete 90-degree clockwise tumble cycles (360 deg total).
+      - Mathematically exact cycloid arc: centre lifts up by (s/√2 - s/2) at 45° apex of each tumble,
+        ensuring bottom vertex remains perfectly tangent to the ground rail.
+      - Seamless loop with edge fade-in / fade-out across the reticle boundary.
     */
-    @keyframes pawnRollDiagramClockwise {
-      0%, 18% {
-        transform: rotate(0deg);
-        transform-origin: bottom left;
-      }
-      34% {
-        transform: rotate(-45deg);
-        transform-origin: bottom left;
-      }
-      48%, 68% {
-        transform: rotate(-90deg);
-        transform-origin: bottom left;
-      }
-      82% {
-        transform: rotate(-45deg);
-        transform-origin: bottom left;
-      }
-      92%, 100% {
-        transform: rotate(0deg);
-        transform-origin: bottom left;
-      }
+    @keyframes pawnRollContinuousRight {
+      0.0% { transform: translate3d(-4.00px, 0.00px, 0) rotate(0.0deg); opacity: 0; }
+      4.2% { transform: translate3d(-2.83px, -0.90px, 0) rotate(15.0deg); opacity: 0.3; }
+      8.3% { transform: translate3d(-1.46px, -1.46px, 0) rotate(30.0deg); opacity: 0.8; }
+      12.5% { transform: translate3d(0.00px, -1.66px, 0) rotate(45.0deg); opacity: 1; }
+      16.7% { transform: translate3d(1.46px, -1.46px, 0) rotate(60.0deg); opacity: 1; }
+      20.8% { transform: translate3d(2.83px, -0.90px, 0) rotate(75.0deg); opacity: 1; }
+      25.0% { transform: translate3d(4.00px, 0.00px, 0) rotate(90.0deg); opacity: 1; }
+      29.2% { transform: translate3d(5.17px, -0.90px, 0) rotate(105.0deg); opacity: 1; }
+      33.3% { transform: translate3d(6.54px, -1.46px, 0) rotate(120.0deg); opacity: 1; }
+      37.5% { transform: translate3d(8.00px, -1.66px, 0) rotate(135.0deg); opacity: 1; }
+      41.7% { transform: translate3d(9.46px, -1.46px, 0) rotate(150.0deg); opacity: 1; }
+      45.8% { transform: translate3d(10.83px, -0.90px, 0) rotate(165.0deg); opacity: 1; }
+      50.0% { transform: translate3d(12.00px, 0.00px, 0) rotate(180.0deg); opacity: 1; }
+      54.2% { transform: translate3d(13.17px, -0.90px, 0) rotate(195.0deg); opacity: 1; }
+      58.3% { transform: translate3d(14.54px, -1.46px, 0) rotate(210.0deg); opacity: 1; }
+      62.5% { transform: translate3d(16.00px, -1.66px, 0) rotate(225.0deg); opacity: 1; }
+      66.7% { transform: translate3d(17.46px, -1.46px, 0) rotate(240.0deg); opacity: 1; }
+      70.8% { transform: translate3d(18.83px, -0.90px, 0) rotate(255.0deg); opacity: 1; }
+      75.0% { transform: translate3d(20.00px, 0.00px, 0) rotate(270.0deg); opacity: 1; }
+      79.2% { transform: translate3d(21.17px, -0.90px, 0) rotate(285.0deg); opacity: 1; }
+      83.3% { transform: translate3d(22.54px, -1.46px, 0) rotate(300.0deg); opacity: 1; }
+      87.5% { transform: translate3d(24.00px, -1.66px, 0) rotate(315.0deg); opacity: 1; }
+      91.7% { transform: translate3d(25.46px, -1.46px, 0) rotate(330.0deg); opacity: 0.8; }
+      95.8% { transform: translate3d(26.83px, -0.90px, 0) rotate(345.0deg); opacity: 0.3; }
+      100.0% { transform: translate3d(28.00px, 0.00px, 0) rotate(360.0deg); opacity: 0; }
     }
 
     .brand-tag {
