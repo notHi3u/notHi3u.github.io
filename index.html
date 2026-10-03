@@ -1236,7 +1236,7 @@
     }
 
     @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; gap: 32px; }
       .ai-framework-grid { grid-template-columns: 1fr; }
       .card-grid { grid-template-columns: 1fr; }
       .log-row { grid-template-columns: 1fr; gap: 8px; }
@@ -1245,6 +1245,99 @@
       .wrap { width: min(100% - 32px, 1180px); margin: auto; }
       .hero-title { font-size: 2.7rem; }
       .contact-panel { padding: 24px; }
+      .sector-block { min-height: auto; padding: 48px 0; }
+    }
+
+    @media (max-width: 640px) {
+      /* UNSTICK SYSTEM STATUS BAR ON MOBILE AS REQUESTED */
+      html {
+        scroll-padding-top: 16px;
+      }
+      .sys-bar {
+        position: static;
+        top: auto;
+        padding: 8px 0;
+      }
+      .sys-bar-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+      #coord-tracker,
+      .sys-bar-inner .sys-status:first-child span:nth-child(2),
+      .sys-bar-inner .sys-status:first-child span:nth-child(3),
+      .sys-bar-inner .sys-status:first-child span:nth-child(5) {
+        display: none;
+      }
+      #live-clock {
+        font-size: 0.65rem;
+        padding: 2px 5px;
+      }
+      .domain-toggle-btn {
+        padding: 4px 8px;
+        font-size: 0.68rem;
+      }
+      .wrap {
+        width: min(100% - 24px, 1180px);
+      }
+      .brand {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 1.15rem;
+      }
+      .brand-tag {
+        font-size: 0.62rem;
+      }
+      .hero-title {
+        font-size: clamp(1.85rem, 8vw, 2.4rem);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+      .hero-lead {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-top: 16px;
+        padding-left: 14px;
+      }
+      .actions {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 24px;
+      }
+      .actions .btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 12px 16px;
+      }
+      .sector-header-banner {
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .sector-header-banner .sector-coord {
+        font-size: 0.62rem;
+      }
+      .telemetry-station {
+        margin-top: 8px;
+      }
+      .dag-container {
+        padding: 12px 14px 10px;
+      }
+      .log-stream-wrap {
+        height: 190px;
+        font-size: 0.68rem;
+        padding: 10px 12px;
+      }
+      .monster-stage {
+        max-width: 100%;
+        width: 320px;
+        height: 380px;
+      }
+      .monster-can-wrapper {
+        transform: scale(0.88);
+      }
     }
   </style>
 </head>
@@ -2064,13 +2157,16 @@
 
     const mainSectorIds = ['top', 'ai-workflow', 'experience', 'architecture', 'matrix', 'contact'];
 
+    function getHeaderOffset() {
+      return window.innerWidth <= 640 ? 0 : 50;
+    }
+
     function getSectorAnchorScrollY(id) {
       if (id === 'top') return 0;
       const el = document.getElementById(id);
       if (!el) return 0;
       const rect = el.getBoundingClientRect();
-      // Account for 50px scroll-padding-top
-      return Math.round(rect.top + window.scrollY - 50);
+      return Math.round(rect.top + window.scrollY - getHeaderOffset());
     }
 
     function calculateMainSectorProgress() {
@@ -2145,7 +2241,7 @@
       if (idx <= 0) return 0;
       const el = sectors[idx];
       if (!el) return 0;
-      return Math.max(0, el.offsetTop + (el.offsetParent ? el.offsetParent.offsetTop : 0) - 50);
+      return Math.max(0, el.offsetTop + (el.offsetParent ? el.offsetParent.offsetTop : 0) - getHeaderOffset());
     }
 
     function getCurrentSectorIndex() {
