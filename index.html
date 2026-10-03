@@ -235,7 +235,7 @@
       right: 6px;
       top: 12px;
       bottom: 12px;
-      width: 1px;
+      width: 2px;
       background: var(--rail-bg);
       z-index: 0;
     }
@@ -285,8 +285,8 @@
     }
 
     .rail-pip {
-      width: 13px;
-      height: 13px;
+      width: 14px;
+      height: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -295,8 +295,8 @@
 
     .rail-pip::before {
       content: "";
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       background: var(--text-muted);
       transform: rotate(45deg);
       transition: all 0.2s ease;
@@ -305,7 +305,7 @@
     .rail-node.active .rail-pip::before {
       background: var(--rail-active);
       box-shadow: 0 0 10px var(--rail-active);
-      transform: rotate(45deg) scale(1.4);
+      transform: rotate(45deg) scale(1.35);
     }
 
     .rail-footer-meta {
