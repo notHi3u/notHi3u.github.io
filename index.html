@@ -1784,10 +1784,10 @@
 
           <div class="monster-can-wrapper" id="monster-can" title="3D Rotating Reactor Core">
             <!-- REAL ULTRA WHITE CAN (LIGHT MODE) -->
-            <img class="monster-img-face monster-img-white" src="assets/monster_ultra_clean.png" alt="Monster Energy Zero Ultra Can" />
+            <img class="monster-img-face monster-img-white" src="assets/monster_ultra_clean.png" alt="Monster Energy Zero Ultra Can" width="170" height="360" loading="lazy" decoding="async" />
 
             <!-- REAL ORIGINAL BLACK & NEON GREEN CAN (DARK MODE) -->
-            <img class="monster-img-face monster-img-dark" src="assets/monster_original_clean.png" alt="Monster Energy Original Can" />
+            <img class="monster-img-face monster-img-dark" src="assets/monster_original_clean.png" alt="Monster Energy Original Can" width="170" height="360" loading="lazy" decoding="async" />
 
             <!-- DYNAMIC PEDESTAL SHADOW -->
             <div class="can-pedestal-shadow"></div>
@@ -1811,13 +1811,21 @@
 
   <!-- SCRIPT: REAL-TIME AUTOMATION SIMULATOR & DOMAIN EXPANSION SYSTEM -->
   <script>
-    // 1. DYNAMIC MOUSE COORDINATE TRACKER & UTC CLOCK
+    // 1. DYNAMIC MOUSE COORDINATE TRACKER & UTC CLOCK (rAF THROTTLED)
     const coordEl = document.getElementById('coord-tracker');
+    let mouseX = 0, mouseY = 0;
+    let mouseRafPending = false;
     window.addEventListener('mousemove', (e) => {
-      if (coordEl) {
-        coordEl.textContent = `POS: [${e.clientX}, ${e.clientY}]`;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!mouseRafPending) {
+        mouseRafPending = true;
+        requestAnimationFrame(() => {
+          if (coordEl) coordEl.textContent = `POS: [${mouseX}, ${mouseY}]`;
+          mouseRafPending = false;
+        });
       }
-    });
+    }, { passive: true });
 
     const clockEl = document.getElementById('live-clock');
     function updateClock() {
@@ -2229,8 +2237,19 @@
       }
     }
 
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
-    window.addEventListener('resize', updateScrollProgress, { passive: true });
+    let scrollRafPending = false;
+    function requestScrollProgressUpdate() {
+      if (!scrollRafPending) {
+        scrollRafPending = true;
+        requestAnimationFrame(() => {
+          updateScrollProgress();
+          scrollRafPending = false;
+        });
+      }
+    }
+
+    window.addEventListener('scroll', requestScrollProgressUpdate, { passive: true });
+    window.addEventListener('resize', requestScrollProgressUpdate, { passive: true });
     updateScrollProgress();
 
     // 5. CONTROLLED SECTOR GLIDER (RESPONSIVE SINGLE-TAP STEPPING)
