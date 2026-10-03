@@ -74,7 +74,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html {
       scroll-behavior: smooth;
-      scroll-snap-type: y proximity;
       scroll-padding-top: 50px;
     }
 
@@ -382,14 +381,11 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
       padding: 56px 0;
       border-top: 1px solid var(--border);
       position: relative;
       opacity: 0.35;
-      transform: translateY(16px);
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .sector-block.hero-sector {
@@ -400,7 +396,6 @@
 
     .sector-block.sector-in-view {
       opacity: 1;
-      transform: translateY(0);
     }
 
     .sector-header-banner {
@@ -1026,7 +1021,6 @@
 
     /* FOOTER */
     footer {
-      scroll-snap-align: end;
       padding: 36px 0 54px;
       border-top: 1px solid var(--border);
       font-family: var(--font-mono);
