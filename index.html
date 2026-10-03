@@ -333,7 +333,87 @@
       letter-spacing: -0.02em;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 3D ROLLING OPERATOR DIAMOND (HUD RETICLE + 3D BLOCK TUMBLE) */
+    .brand-logo-frame {
+      width: 26px;
+      height: 26px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 600px;
+      flex-shrink: 0;
+    }
+
+    .brand-reticle {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      stroke: var(--cyan);
+      opacity: 0.45;
+      transition: opacity 0.3s ease;
+    }
+
+    .brand:hover .brand-reticle {
+      opacity: 0.95;
+    }
+
+    .brand-diamond-flipper {
+      width: 13px;
+      height: 13px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: tacticalBlockFlip 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    }
+
+    .brand:hover .brand-diamond-flipper {
+      animation-duration: 2.2s;
+    }
+
+    .diamond-shape {
+      width: 100%;
+      height: 100%;
+      background: var(--cyan);
+      transform: rotate(45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px var(--cyan);
+      backface-visibility: visible;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .diamond-shape::after {
+      content: '';
+      width: 3.5px;
+      height: 3.5px;
+      background: var(--bg);
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+
+    @keyframes tacticalBlockFlip {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg);
+      }
+      18% {
+        transform: rotateX(180deg) rotateY(0deg);
+      }
+      24%, 50% {
+        transform: rotateX(180deg) rotateY(0deg);
+      }
+      68% {
+        transform: rotateX(180deg) rotateY(180deg);
+      }
+      74%, 100% {
+        transform: rotateX(360deg) rotateY(360deg);
+      }
     }
 
     .brand-tag {
@@ -1282,9 +1362,10 @@
         width: min(100% - 24px, 1180px);
       }
       .brand {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
         font-size: 1.15rem;
       }
       .brand-tag {
@@ -1414,7 +1495,18 @@
       <section id="top" class="sector-block hero-sector" style="border-top: 0; opacity: 1; transform: translateY(0);" data-sector-id="01" data-sector-name="OVERVIEW">
         <!-- NAVIGATION -->
         <nav>
-          <a class="brand" href="#top">
+          <a class="brand" href="#top" title="Bùi Hoàng Hiếu // AI Dev Workflows">
+            <div class="brand-logo-frame" aria-hidden="true">
+              <svg class="brand-reticle" viewBox="0 0 28 28" fill="none">
+                <path d="M2 7.5 L2 2 L7.5 2" stroke-width="1.5" stroke-linecap="square" />
+                <path d="M20.5 2 L26 2 L26 7.5" stroke-width="1.5" stroke-linecap="square" />
+                <path d="M2 20.5 L2 26 L7.5 26" stroke-width="1.5" stroke-linecap="square" />
+                <path d="M20.5 26 L26 26 L26 20.5" stroke-width="1.5" stroke-linecap="square" />
+              </svg>
+              <div class="brand-diamond-flipper">
+                <div class="diamond-shape"></div>
+              </div>
+            </div>
             <span>BÙI HOÀNG HIẾU</span>
             <span class="brand-tag">AI DEV WORKFLOWS</span>
           </a>
