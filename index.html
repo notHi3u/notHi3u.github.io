@@ -2137,67 +2137,83 @@
     window.addEventListener('resize', updateScrollProgress, { passive: true });
     updateScrollProgress();
 
-    // 5. CONTROLLED SECTOR GLIDER (PREVENTS RAPID RUNAWAY SKIPPING)
+    // 5. CONTROLLED SECTOR GLIDER (RESPONSIVE SINGLE-TAP STEPPING)
     const sectors = Array.from(document.querySelectorAll('.sector-block'));
-    let currentSectorIdx = 0;
     let isGliding = false;
 
-    // Synchronize active sector index
-    const syncActiveSector = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
-          const idx = sectors.indexOf(entry.target);
-          if (idx !== -1 && !isGliding) {
-            currentSectorIdx = idx;
-          }
+    function getSectorTargetY(idx) {
+      if (idx <= 0) return 0;
+      const el = sectors[idx];
+      if (!el) return 0;
+      return Math.max(0, el.offsetTop + (el.offsetParent ? el.offsetParent.offsetTop : 0) - 50);
+    }
+
+    function getCurrentSectorIndex() {
+      const sy = window.scrollY || document.documentElement.scrollTop;
+      let closest = 0;
+      let minDiff = Infinity;
+      for (let i = 0; i < sectors.length; i++) {
+        const targetY = getSectorTargetY(i);
+        const diff = Math.abs(sy - targetY);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closest = i;
         }
-      });
-    }, { threshold: [0.35] });
-    sectors.forEach(s => syncActiveSector.observe(s));
+      }
+      return closest;
+    }
 
     function glideToSector(idx) {
       if (idx < 0 || idx >= sectors.length) return;
       isGliding = true;
-      currentSectorIdx = idx;
-      sectors[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const targetY = getSectorTargetY(idx);
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
       setTimeout(() => {
         isGliding = false;
-      }, 950); // 950ms cooldown prevents skipping multiple sections at once
+      }, 450); // Snappy cooldown so each tap responds immediately
     }
 
     // Gentle wheel step
     window.addEventListener('wheel', (e) => {
       if (e.target.closest('#terminal-stream')) return;
-      if (Math.abs(e.deltaY) < 18) return;
+      if (Math.abs(e.deltaY) < 16) return;
 
       e.preventDefault();
       if (isGliding) return;
 
+      const current = getCurrentSectorIndex();
       if (e.deltaY > 0) {
-        if (currentSectorIdx < sectors.length - 1) {
-          glideToSector(currentSectorIdx + 1);
+        if (current < sectors.length - 1) {
+          glideToSector(current + 1);
         }
       } else {
-        if (currentSectorIdx > 0) {
-          glideToSector(currentSectorIdx - 1);
+        if (current > 0) {
+          glideToSector(current - 1);
         }
       }
     }, { passive: false });
 
-    // Arrow keys support
+    // Arrow keys & Page keys (Instant 1-tap response)
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-        if (currentSectorIdx < sectors.length - 1 && !isGliding) {
-          e.preventDefault();
-          glideToSector(currentSectorIdx + 1);
+      // Don't intercept when user is typing in form controls
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        if (isGliding) return;
+        const current = getCurrentSectorIndex();
+        if (current < sectors.length - 1) {
+          glideToSector(current + 1);
         }
       } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-        if (currentSectorIdx > 0 && !isGliding) {
-          e.preventDefault();
-          glideToSector(currentSectorIdx - 1);
+        e.preventDefault();
+        if (isGliding) return;
+        const current = getCurrentSectorIndex();
+        if (current > 0) {
+          glideToSector(current - 1);
         }
       }
-    });
+    }, { capture: true });
 
     // Pager rail clicks
     railNodes.forEach((node, idx) => {
