@@ -1,106 +1,2217 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio of an Odoo developer focused on maintainable business software, deployment, OWL interfaces, and AI-assisted engineering.">
-  <title>Bùi Hoàng Hiếu | Odoo Developer</title>
+  <meta name="description" content="Portfolio of Bùi Hoàng Hiếu — Software Engineer specializing in automating development workflows using AI. Structured context engineering, AST codebase exploration, automated test generation, and human-in-the-loop quality gates.">
+  <title>BÙI HOÀNG HIẾU // AI_DEV_WORKFLOWS & SOFTWARE_ENGINEER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#08111f; --panel:#101d31; --text:#eef5ff; --muted:#9eb0c8; --line:#263954; --accent:#6ee7d8; --accent-2:#8aa8ff; }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; background:radial-gradient(circle at 85% 5%, #19355a 0, transparent 32rem), var(--bg); color:var(--text); font:16px/1.7 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-    a { color:inherit; }
-    .wrap { width:min(1080px, calc(100% - 40px)); margin:auto; }
-    nav { display:flex; justify-content:space-between; align-items:center; padding:24px 0; }
-    .mark { color:var(--accent); font-weight:800; letter-spacing:.08em; text-decoration:none; }
-    nav .links { display:flex; gap:22px; color:var(--muted); font-size:.94rem; }
-    nav .links a { text-decoration:none; }
-    nav .links a:hover { color:var(--text); }
-    .hero { min-height:72vh; display:grid; align-items:center; padding:52px 0 90px; }
-    .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.78rem; }
-    h1 { max-width:780px; margin:14px 0 22px; font-size:clamp(3rem, 8vw, 6.5rem); line-height:.98; letter-spacing:-.07em; }
-    h1 span { color:var(--accent-2); }
-    .lead { max-width:680px; color:var(--muted); font-size:1.2rem; }
-    .actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:30px; }
-    .button { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:10px 18px; text-decoration:none; font-weight:700; }
-    .button.primary { background:var(--accent); color:#06131b; border-color:var(--accent); }
-    section { padding:78px 0; border-top:1px solid var(--line); }
-    h2 { margin:0 0 30px; font-size:2rem; letter-spacing:-.04em; }
-    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-    .card { background:color-mix(in srgb, var(--panel) 90%, transparent); border:1px solid var(--line); border-radius:20px; padding:24px; }
-    .card h3 { margin:0 0 8px; font-size:1.12rem; }
-    .card p { margin:0; color:var(--muted); }
-    .timeline { display:grid; gap:20px; }
-    .role { display:grid; grid-template-columns:150px 1fr; gap:28px; padding:22px 0; border-bottom:1px solid var(--line); }
-    .role:last-child { border-bottom:0; }
-    .date { color:var(--accent); font-weight:700; }
-    .role h3 { margin:0 0 4px; }
-    .role p { margin:0; color:var(--muted); }
-    .tags { display:flex; flex-wrap:wrap; gap:10px; }
-    .tag { border:1px solid var(--line); border-radius:999px; padding:7px 13px; color:var(--muted); }
-    .easter-egg { opacity:.38; cursor:help; transition:opacity .2s ease; }
-    .easter-egg:hover { opacity:1; color:var(--accent); }
-    .email-note { display:block; margin-top:10px; font-size:.8rem; }
-    footer { padding:32px 0 48px; color:var(--muted); display:flex; justify-content:space-between; gap:20px; }
-    @media (max-width:700px) { .wrap { width:min(100% - 28px, 1080px); } nav .links { display:none; } .grid { grid-template-columns:1fr; } .role { grid-template-columns:1fr; gap:4px; } footer { display:block; } }
+    /* =========================================================================
+       THEME VARIABLES
+       Light Mode: Pure Swiss Style (Josef Müller-Brockmann / International Typographic)
+    /* =========================================================================
+       THEME VARIABLES: ODOO APPS HOMESCREEN ARCHITECTURE
+       Light Mode: Odoo Runbot Day (Warm off-white #f8f9fa with soft gray dots)
+       Dark Mode: Odoo Runbot Dark Mode (Deep slate #12151b with subtle teal/slate dots)
+       ========================================================================= */
+    :root[data-theme="light"] {
+      --bg: #f8f9fa;
+      --bg-dots: rgba(18, 21, 27, 0.08);
+      --bg-panel: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f3f5;
+      --text: #1a1e24;
+      --text-muted: #5f6b7c;
+      --border: #d0d7de;
+      --border-subtle: #e4e8ec;
+      --border-bright: #dc2626; /* Crimson Red */
+      --cyan: #dc2626;          /* Red signature accent in light mode */
+      --cyan-dim: rgba(220, 38, 38, 0.08);
+      --amber: #017e84;         /* Odoo Teal */
+      --amber-dim: rgba(1, 126, 132, 0.08);
+      --emerald: #00873e;
+      --terminal-bg: #14171f;
+      --terminal-text: #f0f3f6;
+      --rail-bg: #e2e6ea;
+      --rail-active: #dc2626;
+      --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+      --font-display: "Space Grotesk", -apple-system, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --font-body: "Inter", -apple-system, sans-serif;
+      --clip-tactical: none;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #12151b;
+      --bg-dots: rgba(255, 255, 255, 0.065);
+      --bg-panel: #1a1e27;
+      --bg-card: #1f242f;
+      --bg-card-hover: #262c39;
+      --text: #f0f4f8;
+      --text-muted: #8b99ad;
+      --border: rgba(255, 255, 255, 0.12);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(0, 240, 255, 0.45);
+      --cyan: #00f0ff;          /* Rhodes Island Cyan */
+      --cyan-dim: rgba(0, 240, 255, 0.12);
+      --amber: #ffb800;
+      --amber-dim: rgba(255, 184, 0, 0.12);
+      --emerald: #00e676;
+      --terminal-bg: #0b0e14;
+      --terminal-text: #ccd7e4;
+      --rail-bg: rgba(255, 255, 255, 0.1);
+      --rail-active: #00f0ff;
+      --shadow-card: 0 16px 36px rgba(0,0,0,0.5);
+      --font-display: "Space Grotesk", -apple-system, sans-serif;
+      --font-mono: "JetBrains Mono", monospace;
+      --font-body: "Inter", -apple-system, sans-serif;
+      --clip-tactical: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
+      scroll-padding-top: 50px;
+    }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border: 1px solid var(--border-bright);
+      transition: background 0.2s ease;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cyan);
+    }
+
+    /* ODOO APPS BACKGROUND WITH PRECISION DOT GRID (TWICE AS DENSE) */
+    body {
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--bg-dots) 1px, transparent 1px);
+      background-size: 12px 12px;
+      background-position: 0 0;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 70px));
+      margin-left: max(35px, calc((100% - 1180px) / 2));
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* SYSTEM STATUS BAR */
+    .sys-bar {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .sys-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .sys-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cyan);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+
+    .telemetry-tag {
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      padding: 2px 7px;
+      border: 1px solid var(--cyan);
+      font-weight: 700;
+    }
+
+    /* DOMAIN EXPANSION TOGGLE BUTTON */
+    .domain-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    :root[data-theme="dark"] .domain-toggle-btn {
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: var(--cyan-dim);
+    }
+
+    .domain-toggle-btn:hover {
+      background: var(--text);
+      color: var(--bg);
+      transform: translateY(-1px);
+    }
+
+    :root[data-theme="dark"] .domain-toggle-btn:hover {
+      background: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 15px var(--cyan);
+    }
+
+    /* VERTICAL SCROLL RAIL (RIGHT-SIDE PAGER) */
+    .sector-rail {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 95;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 18px;
+    }
+
+    .rail-track-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 18px;
+    }
+
+    .rail-vertical-line {
+      position: absolute;
+      right: 6px;
+      top: 12px;
+      bottom: 12px;
+      width: 1px;
+      background: var(--rail-bg);
+      z-index: 0;
+    }
+
+    .rail-progress-bar {
+      position: absolute;
+      right: 6px;
+      top: 12px;
+      width: 2px;
+      background: var(--rail-active);
+      box-shadow: 0 0 8px var(--rail-active);
+      transition: height 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
+      height: 0;
+    }
+
+    .rail-node {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .rail-tooltip {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .rail-node:hover .rail-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    .rail-pip {
+      width: 13px;
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .rail-pip::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      background: var(--text-muted);
+      transform: rotate(45deg);
+      transition: all 0.2s ease;
+    }
+
+    .rail-node.active .rail-pip::before {
+      background: var(--rail-active);
+      box-shadow: 0 0 10px var(--rail-active);
+      transform: rotate(45deg) scale(1.4);
+    }
+
+    .rail-footer-meta {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-align: right;
+      margin-top: 6px;
+    }
+
+    /* NAVIGATION */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-links a span {
+      color: var(--cyan);
+      opacity: 0.8;
+      font-size: 0.7rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* SECTOR BLOCK & SEGMENT DELIMITER WITH STICKY SNAP LOCK */
+    .sector-block {
+      min-height: calc(100vh - 50px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      opacity: 0.35;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sector-block.hero-sector {
+      border-top: 0;
+      justify-content: flex-start;
+      padding-top: 0;
+    }
+
+    .sector-block.sector-in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .sector-header-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 6px;
+    }
+
+    .sector-header-banner .badge {
+      background: var(--cyan-dim);
+      border: 1px solid var(--cyan);
+      padding: 2px 7px;
+      font-weight: 700;
+    }
+
+    .sector-header-banner .sector-coord {
+      color: var(--text-muted);
+      font-size: 0.68rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+    }
+
+    #ai-workflow {
+      padding: 24px 0 32px;
+      justify-content: flex-start;
+    }
+
+    #ai-workflow .section-title {
+      margin-bottom: 18px;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 24px 0 40px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .hero-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+
+    :root[data-theme="dark"] .hero-meta-badge {
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    }
+
+    .hero-meta-badge strong {
+      color: var(--cyan);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5.2vw, 4.2rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-title .highlight {
+      color: var(--cyan);
+    }
+
+    :root[data-theme="dark"] .hero-title .highlight {
+      text-shadow: 0 0 32px rgba(0, 240, 255, 0.25);
+    }
+
+    .hero-lead {
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-top: 22px;
+      font-weight: 400;
+      border-left: 3px solid var(--cyan);
+      padding-left: 18px;
+    }
+
+    /* LIVE TELEMETRY TERMINAL WIDGET */
+    .telemetry-station {
+      background: var(--terminal-bg);
+      color: var(--terminal-text);
+      border: 1px solid var(--border);
+      position: relative;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s ease;
+    }
+
+    :root[data-theme="dark"] .telemetry-station {
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+    }
+
+    .station-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 10px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+    }
+
+    .station-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .station-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ghost-sm {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #b0bac9;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-ghost-sm:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* ANIMATED DAG */
+    .dag-container {
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .dag-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: #8b99ad;
+      margin-bottom: 8px;
+    }
+
+    .dag-svg {
+      width: 100%;
+      height: 48px;
+      display: block;
+    }
+
+    .dag-node-text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      fill: #8b99ad;
+      letter-spacing: 0.05em;
+    }
+
+    .dag-node-text.active {
+      fill: var(--cyan);
+      font-weight: 700;
+    }
+
+    /* LIVE LOG STREAM */
+    .log-stream-wrap {
+      height: 240px;
+      overflow-y: auto;
+      padding: 14px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    }
+
+    .log-entry {
+      display: flex;
+      gap: 10px;
+      animation: fadeInRow 0.25s ease-out;
+      word-break: break-all;
+    }
+
+    @keyframes fadeInRow {
+      from { opacity: 0; transform: translateX(-4px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .log-time-code {
+      color: #6c7d93;
+      flex-shrink: 0;
+    }
+
+    .log-tag {
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .log-tag.exec { color: var(--cyan); }
+    .log-tag.test { color: var(--emerald); }
+    .log-tag.gate { color: #f0a020; }
+    .log-tag.dock { color: #8aa8ff; }
+
+    .log-msg { color: #dce5ef; }
+
+    .station-footer {
+      padding: 8px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.25);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: #8b99ad;
+    }
+
+    /* BUTTONS */
+    .actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 24px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    :root[data-theme="dark"] .btn {
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+
+    .btn:hover {
+      border-color: var(--cyan);
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    .btn.primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    :root[data-theme="dark"] .btn.primary {
+      background: var(--cyan);
+      color: #061118;
+      border-color: var(--cyan);
+    }
+
+    .btn.primary:hover {
+      background: var(--cyan);
+      color: #fff;
+    }
+
+    :root[data-theme="dark"] .btn.primary:hover {
+      background: #38f4ff;
+      color: #000;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+    }
+
+    /* PROTOCOL & CASE STUDY CARDS */
+    .ai-framework-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .protocol-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 20px 22px;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      transition: all 0.2s ease;
+    }
+
+    .protocol-card:hover {
+      border-color: var(--cyan);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    :root[data-theme="dark"] .protocol-card::before,
+    :root[data-theme="dark"] .protocol-card::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      pointer-events: none;
+    }
+
+    :root[data-theme="dark"] .protocol-card::before {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid var(--border-bright);
+      border-left: 2px solid var(--border-bright);
+    }
+
+    :root[data-theme="dark"] .protocol-card::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 2px solid var(--border-bright);
+      border-right: 2px solid var(--border-bright);
+    }
+
+    .protocol-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .protocol-step {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .protocol-badge {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      padding: 2px 7px;
+      background: var(--cyan-dim);
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .protocol-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+
+    .protocol-card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .protocol-features {
+      list-style: none;
+      display: grid;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text);
+    }
+
+    .protocol-features li {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .protocol-features li::before {
+      content: "▹";
+      color: var(--cyan);
+      font-size: 0.82rem;
+    }
+
+    /* 3-COLUMN CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .tactical-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 28px 24px;
+      position: relative;
+      box-shadow: var(--shadow-card);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .tactical-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cyan);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      display: block;
+      font-weight: 700;
+    }
+
+    .tactical-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .tactical-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* TIMELINE / OPERATIONAL LOGS */
+    .log-list {
+      display: grid;
+      gap: 0;
+      border: 1px solid var(--border);
+      background: var(--bg-panel);
+    }
+
+    .log-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      padding: 26px 28px;
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.15s ease;
+      position: relative;
+    }
+
+    .log-row:last-child { border-bottom: 0; }
+    .log-row:hover { background: var(--bg-card-hover); }
+
+    .log-time {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-weight: 700;
+    }
+
+    .log-time .stamp {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .log-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .log-content p {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.65;
+    }
+
+    /* TOOLKIT MATRIX */
+    .matrix-categories { display: grid; gap: 22px; }
+
+    .matrix-group {
+      border: 1px solid var(--border);
+      background: var(--bg-panel);
+      padding: 22px 24px;
+    }
+
+    :root[data-theme="dark"] .matrix-group {
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    }
+
+    .matrix-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--cyan);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .tags-matrix {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .tag-chip {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 7px 13px;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      cursor: default;
+    }
+
+    :root[data-theme="dark"] .tag-chip {
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+      color: var(--text-muted);
+    }
+
+    .tag-chip::before {
+      content: "/";
+      color: var(--cyan);
+      opacity: 0.7;
+    }
+
+    .tag-chip:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      transform: translateY(-1px);
+    }
+
+    .tag-chip.highlight-tech {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      font-weight: 600;
+    }
+
+    /* CONTACT / COMM */
+    .contact-panel {
+      border: 1px solid var(--border);
+      background: var(--bg-panel);
+      padding: 42px 36px;
+      position: relative;
+      box-shadow: var(--shadow-card);
+    }
+
+    .contact-panel::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 20px;
+      width: 80px;
+      height: 3px;
+      background: var(--cyan);
+    }
+
+    .classified-note {
+      display: inline-block;
+      margin-top: 18px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      opacity: 0.85;
+      cursor: help;
+      transition: opacity 0.2s;
+    }
+
+    .classified-note:hover { opacity: 1; text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      scroll-snap-align: end;
+      padding: 36px 0 54px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer a:hover { color: var(--cyan); }
+
+    /* =========================================================================
+       DIAGONAL TRIANGLE FLIP WAVE TRANSITION (TOP-LEFT TO BOTTOM-RIGHT)
+       ========================================================================= */
+    #triangle-flip-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10000;
+      display: none;
+    }
+
+    #triangle-flip-canvas.active {
+      display: block;
+    }
+
+    /* Native View Transitions synchronized with the diagonal wave front */
+    ::view-transition-group(root) {
+      animation-duration: 950ms;
+    }
+
+    ::view-transition-old(root) {
+      animation: none;
+      z-index: 1;
+    }
+
+    ::view-transition-new(root) {
+      animation: diagonalThemeWipe 950ms cubic-bezier(0.2, 0.0, 0.2, 1) both;
+      z-index: 2;
+    }
+
+    @keyframes diagonalThemeWipe {
+      0% {
+        clip-path: polygon(-20% -20%, -20% -20%, -20% -20%, -20% -20%);
+      }
+      50% {
+        clip-path: polygon(-20% -20%, 120% -20%, -20% 120%, -20% 120%);
+      }
+      100% {
+        clip-path: polygon(-20% -20%, 140% -20%, 140% 140%, -20% 140%);
+      }
+    }
+
+    /* =========================================================================
+       SECTOR 07: CLASSIFIED REFUEL CHAMBER (ROTATING REAL MONSTER ENERGY CAN)
+       Hidden from right-side sector rail map.
+       ========================================================================= */
+    .monster-chamber {
+      min-height: calc(100vh - 50px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 0;
+      position: relative;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    .monster-stage {
+      perspective: 1200px;
+      width: 380px;
+      height: 440px;
+      margin: 24px auto 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* RADIATION WAVES EMITTING FROM THE CAN CORE (FIRST ITERATION) */
+    .radiation-rings {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      z-index: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rad-ring {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      box-sizing: border-box;
+      animation: radiationWavePulse 3.6s cubic-bezier(0.12, 0.7, 0.28, 1) infinite;
+    }
+
+    /* LIGHT MODE: Clean ultrasonic shockwaves with subtle silver/red accents */
+    .rad-ring {
+      border: 1.5px solid rgba(17, 17, 20, 0.16);
+      box-shadow: 0 0 15px rgba(230, 0, 0, 0.1), inset 0 0 15px rgba(17, 17, 20, 0.05);
+    }
+
+    /* DARK MODE: Intense radioactive green & Rhodes cyan gamma waves */
+    :root[data-theme="dark"] .rad-ring {
+      border: 2px solid rgba(0, 255, 102, 0.5);
+      box-shadow: 0 0 25px rgba(0, 255, 102, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .rad-ring:nth-child(1) { animation-delay: 0s; }
+    .rad-ring:nth-child(2) { animation-delay: 0.9s; }
+    .rad-ring:nth-child(3) { animation-delay: 1.8s; }
+    .rad-ring:nth-child(4) { animation-delay: 2.7s; }
+
+    @keyframes radiationWavePulse {
+      0% {
+        width: 60px;
+        height: 120px;
+        opacity: 0.85;
+        transform: scale(0.6);
+        border-radius: 46% 54% 48% 52% / 52% 48% 52% 48%;
+      }
+      40% {
+        opacity: 0.6;
+        border-radius: 50%;
+      }
+      100% {
+        width: 380px;
+        height: 520px;
+        opacity: 0;
+        transform: scale(1.15);
+        border-radius: 50%;
+      }
+    }
+
+    .monster-can-wrapper {
+      position: relative;
+      width: 170px;
+      height: 360px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      transition: filter 0.4s ease;
+    }
+
+    /* REAL MONSTER CAN PHOTO CONTAINERS (WHITE ULTRA FOR LIGHT // ORIGINAL BLACK FOR DARK) */
+    .monster-img-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.55s ease;
+    }
+
+    /* Light Mode: White Monster Ultra is visible; Black can is hidden */
+    .monster-img-white {
+      opacity: 1;
+      transform: scale(1);
+      filter: drop-shadow(0 20px 26px rgba(0, 0, 0, 0.22)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+    }
+
+    .monster-img-dark {
+      opacity: 0;
+      transform: scale(0.95);
+      filter: drop-shadow(0 24px 34px rgba(0, 240, 255, 0.35)) drop-shadow(0 0 24px rgba(0, 255, 102, 0.45));
+    }
+
+    /* Dark Mode: Original Black Monster is visible; White can is hidden */
+    :root[data-theme="dark"] .monster-img-white {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    :root[data-theme="dark"] .monster-img-dark {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* CAN AMBIENT PEDESTAL GLOW & SHADOW */
+    .can-pedestal-shadow {
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, transparent 72%);
+      filter: blur(5px);
+      z-index: -1;
+      transition: background 0.4s ease;
+    }
+
+    :root[data-theme="dark"] .can-pedestal-shadow {
+      background: radial-gradient(ellipse at center, rgba(0, 255, 102, 0.45) 0%, rgba(0, 240, 255, 0.25) 45%, transparent 75%);
+    }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .ai-framework-grid { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+      .log-row { grid-template-columns: 1fr; gap: 8px; }
+      .nav-links { display: none; }
+      .sector-rail { display: none; }
+      .wrap { width: min(100% - 32px, 1180px); margin: auto; }
+      .hero-title { font-size: 2.7rem; }
+      .contact-panel { padding: 24px; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- FULLSCREEN TRIANGLE FLIP WAVE CANVAS -->
+  <canvas id="triangle-flip-canvas"></canvas>
+
+  <!-- VERTICAL SCROLL RAIL (PAGER ON RIGHT EDGE) -->
+  <aside class="sector-rail" aria-label="Sector Navigation Rail">
+    <div class="rail-track-wrap">
+      <div class="rail-vertical-line"></div>
+      <div class="rail-progress-bar" id="rail-progress"></div>
+
+      <a href="#top" class="rail-node active" data-sector="top">
+        <span class="rail-tooltip">01 // OVERVIEW</span>
+        <span class="rail-pip"></span>
+      </a>
+
+      <a href="#ai-workflow" class="rail-node" data-sector="ai-workflow">
+        <span class="rail-tooltip">02 // AI_PIPELINE</span>
+        <span class="rail-pip"></span>
+      </a>
+
+      <a href="#experience" class="rail-node" data-sector="experience">
+        <span class="rail-tooltip">03 // OPERATIONS</span>
+        <span class="rail-pip"></span>
+      </a>
+
+      <a href="#architecture" class="rail-node" data-sector="architecture">
+        <span class="rail-tooltip">04 // FOUNDATIONS</span>
+        <span class="rail-pip"></span>
+      </a>
+
+      <a href="#matrix" class="rail-node" data-sector="matrix">
+        <span class="rail-tooltip">05 // TECH_MATRIX</span>
+        <span class="rail-pip"></span>
+      </a>
+
+      <a href="#contact" class="rail-node" data-sector="contact">
+        <span class="rail-tooltip">06 // COMM_LINK</span>
+        <span class="rail-pip"></span>
+      </a>
+    </div>
+    <div class="rail-footer-meta" id="scroll-percentage">0%</div>
+  </aside>
+
+  <!-- SYSTEM STATUS BAR -->
+  <aside class="sys-bar">
+    <div class="wrap sys-bar-inner">
+      <div class="sys-status">
+        <span class="pulse-dot"></span>
+        <span>SYS.NET // ACTIVE_NODE_v19</span>
+        <span style="opacity: 0.35">|</span>
+        <span id="active-sector-tag" style="color: var(--cyan); font-weight: 700;">SECTOR [01/06] // OVERVIEW</span>
+        <span style="opacity: 0.35">|</span>
+        <span id="coord-tracker" style="color: var(--text-muted);">POS: [0, 0]</span>
+      </div>
+      <div class="sys-status">
+        <span class="telemetry-tag" id="live-clock">UTC+7 00:00:00</span>
+        <span style="opacity: 0.35">|</span>
+        <!-- COLOR MODE TOGGLE -->
+        <button class="domain-toggle-btn" id="domain-toggle" title="Toggle Dark/Light Mode">
+          <span id="domain-icon">◐</span>
+          <span id="domain-label">DARK MODE</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
   <div class="wrap">
-    <nav>
-      <a class="mark" href="#top">Bùi Hoàng Hiếu</a>
-      <div class="links"><a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div>
-    </nav>
+    <main>
+      <!-- SECTOR 01: HERO / OVERVIEW -->
+      <section id="top" class="sector-block hero-sector" style="border-top: 0; opacity: 1; transform: translateY(0);" data-sector-id="01" data-sector-name="OVERVIEW">
+        <!-- NAVIGATION -->
+        <nav>
+          <a class="brand" href="#top">
+            <span>BÙI HOÀNG HIẾU</span>
+            <span class="brand-tag">AI DEV WORKFLOWS</span>
+          </a>
+          <div class="nav-links">
+            <a href="#ai-workflow"><span>01</span> AI Architecture</a>
+            <a href="#experience"><span>02</span> Operations</a>
+            <a href="#architecture"><span>03</span> Systems</a>
+            <a href="#matrix"><span>04</span> Matrix</a>
+            <a href="#contact"><span>05</span> Comm</a>
+          </div>
+        </nav>
 
-    <main id="top">
-      <section class="hero" style="border-top:0">
-        <div>
-          <div class="eyebrow">Odoo developer · HCMC, Vietnam</div>
-          <h1>Building better business software with <span>Odoo.</span></h1>
-          <p class="lead">I’m an Odoo developer with one year of professional experience at WATATECH. My work covers complete business applications, practical deployment, and the supporting IT work needed in a startup: models, ORM logic, workflows, security, views, reports, integrations, and OWL frontend capabilities.</p>
-          <div class="actions"><a class="button primary" href="#contact">Let’s connect</a><a class="button" href="https://github.com/notHi3u">View GitHub</a></div>
+        <div class="hero">
+          <div>
+            <div class="hero-meta-badge">
+              <span>SPECIALIZATION: </span>
+              <strong>AUTOMATING DEVELOPMENT WORKFLOWS USING AI</strong>
+            </div>
+            <h1 class="hero-title">
+              AUTOMATING DEVELOPMENT WORKFLOWS USING <span class="highlight">AI & AGENTS.</span>
+            </h1>
+            <p class="hero-lead">
+              I build practical AI automation into everyday engineering workflows. Instead of relying on full-system hype or naive chat autocompletion, I supervise AI models with curated context briefs, automated test synthesis, AST inspection tools, and strict quality gates to accelerate real software delivery.
+            </p>
+
+            <div class="actions">
+              <a class="btn primary" href="#contact">ESTABLISH COMM LINK ↗</a>
+              <a class="btn" href="#ai-workflow">EXPLORE DEV WORKFLOW ↓</a>
+              <a class="btn" href="https://github.com/notHi3u" target="_blank" rel="noopener">GITHUB PROTOCOL [notHi3u]</a>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: LIVE AUTOMATED TELEMETRY TERMINAL -->
+          <div class="telemetry-station">
+            <div class="station-bar">
+              <div class="station-title">
+                <span class="pulse-dot" style="width: 6px; height: 6px;"></span>
+                <span>AGENT_ORCHESTRATOR // CLUSTER_PID_4920</span>
+              </div>
+              <div class="station-controls">
+                <button class="btn-ghost-sm" id="btn-toggle-stream">PAUSE</button>
+                <button class="btn-ghost-sm" id="btn-clear-stream">CLEAR</button>
+              </div>
+            </div>
+
+            <!-- ANIMATED AUTOMATED PIPELINE DAG -->
+            <div class="dag-container">
+              <div class="dag-meta">
+                <span>MULTI-AGENT EXECUTION GRAPH</span>
+                <span id="dag-status" style="color: var(--cyan);">AGENT 2/4 ACTIVE</span>
+              </div>
+              <svg class="dag-svg" viewBox="0 0 460 48" fill="none">
+                <line x1="50" y1="24" x2="140" y2="24" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
+                <line x1="140" y1="24" x2="230" y2="24" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
+                <line x1="230" y1="24" x2="320" y2="24" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
+                <line x1="320" y1="24" x2="410" y2="24" stroke="rgba(255,255,255,0.15)" stroke-width="2" />
+
+                <line x1="50" y1="24" x2="410" y2="24" stroke="var(--cyan)" stroke-width="2" stroke-dasharray="8 12" stroke-linecap="round">
+                  <animate attributeName="stroke-dashoffset" values="40;0" dur="2s" repeatCount="indefinite" />
+                </line>
+
+                <rect x="20" y="12" width="60" height="24" fill="#131924" stroke="var(--cyan)" stroke-width="1" />
+                <text x="50" y="27" text-anchor="middle" class="dag-node-text active">PLANNER</text>
+
+                <rect x="110" y="12" width="60" height="24" fill="#131924" stroke="var(--cyan)" stroke-width="1" />
+                <text x="140" y="27" text-anchor="middle" class="dag-node-text active">SUBAGENT</text>
+
+                <rect x="200" y="12" width="60" height="24" fill="#131924" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                <text x="230" y="27" text-anchor="middle" class="dag-node-text">EVAL_GATE</text>
+
+                <rect x="290" y="12" width="60" height="24" fill="#131924" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                <text x="320" y="27" text-anchor="middle" class="dag-node-text">SYNTHESIS</text>
+
+                <rect x="380" y="12" width="60" height="24" fill="#131924" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                <text x="410" y="27" text-anchor="middle" class="dag-node-text">DEPLOY</text>
+              </svg>
+            </div>
+
+            <!-- STREAMING TERMINAL CONSOLE -->
+            <div class="log-stream-wrap" id="terminal-stream">
+              <!-- Populated by JavaScript -->
+            </div>
+
+            <div class="station-footer">
+              <span>AGENTS: 4 SPAWNED // CONCURRENCY: OK</span>
+              <span>INFERENCE_TOKENS: 142K // ERRORS: 0</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="about">
-        <div class="eyebrow">A little about me</div>
-        <h2>Curious about how systems work.</h2>
-        <div class="grid">
-          <article class="card"><h3>Education</h3><p>Bachelor’s degree in Information Technology from Ho Chi Minh City University of Education (HCMUE).</p></article>
-          <article class="card"><h3>Focus</h3><p>End-to-end Odoo modules, plus hands-on deployment for local test and production environments using Docker and GitHub Actions.</p></article>
-          <article class="card"><h3>Approach</h3><p>Clear reasoning, small useful abstractions, careful debugging, and AI-assisted development with human review.</p></article>
+      <!-- SECTOR 02: AI ARCHITECTURE & AGENTIC PIPELINES -->
+      <section id="ai-workflow" class="sector-block" data-sector-id="02" data-sector-name="AI_PIPELINE">
+        <div class="sector-header-banner">
+          <div>
+            <span class="badge">[ SECTOR 02/06 ]</span>
+            <span style="margin-left: 8px;">// DOCUMENT_DRIVEN_AGENT_WORKFLOWS</span>
+          </div>
+          <span class="sector-coord">SYS_ID: 0x9FA1 // STATUS: ENFORCED</span>
+        </div>
+        <h2 class="section-title">Document-Driven Agent Workflows for Software Development.</h2>
+
+        <div class="ai-framework-grid">
+          <!-- CARD 1 -->
+          <article class="protocol-card">
+            <div class="protocol-header">
+              <span class="protocol-step">[ STAGE // 01 ]</span>
+              <span class="protocol-badge">CONTEXT & BRIEFS</span>
+            </div>
+            <h3>Document-Driven Context & Specs</h3>
+            <p>Reliable agent execution starts with structured documents. I construct precise context briefs, ADR references, and file:line code anchors so agents stay grounded in exact specifications without hallucinating interfaces.</p>
+            <ul class="protocol-features">
+              <li>Pre-code Context Briefs with explicit code anchors</li>
+              <li>Documented domain boundaries & architectural invariants</li>
+              <li>Zero-hallucination constraints on schema and logic</li>
+            </ul>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="protocol-card">
+            <div class="protocol-header">
+              <span class="protocol-step">[ STAGE // 02 ]</span>
+              <span class="protocol-badge">AGENT DELEGATION</span>
+            </div>
+            <h3>Scoped Subagent Task Execution</h3>
+            <p>Complex engineering tasks are broken down into focused subagents: research agents survey call graphs, planning agents author discrete steps, and code agents write deterministic patches in isolated workspaces.</p>
+            <ul class="protocol-features">
+              <li>Concurrent subagents running focused task scopes</li>
+              <li>Structured handoffs between research, drafting, and QA</li>
+              <li>Tool invocation across terminals, AST graphs, and files</li>
+            </ul>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="protocol-card">
+            <div class="protocol-header">
+              <span class="protocol-step">[ STAGE // 03 ]</span>
+              <span class="protocol-badge">HUMAN-IN-THE-LOOP</span>
+            </div>
+            <h3>Human Input & Critical Decisions</h3>
+            <p>Agents stop and solicit human review on missing information, ambiguous business requirements, or architectural fork points. Humans retain full control over key trade-offs and code commitments.</p>
+            <ul class="protocol-features">
+              <li>Interactive gates for ambiguous or missing requirements</li>
+              <li>Human review and sign-off on critical design choices</li>
+              <li>Strict Definition-of-Done enforcement before branch merge</li>
+            </ul>
+          </article>
+
+          <!-- CARD 4 -->
+          <article class="protocol-card">
+            <div class="protocol-header">
+              <span class="protocol-step">[ STAGE // 04 ]</span>
+              <span class="protocol-badge">TEST SYNTHESIS</span>
+            </div>
+            <h3>Automated Test Harness & Verification</h3>
+            <p>AI models synthesize rigorous test suites and regression matrices to verify changes against real constraints before any commit touches trunk.</p>
+            <ul class="protocol-features">
+              <li>Automated unit, integration & regression test suites</li>
+              <li>Edge-case discovery & transaction rollback validation</li>
+              <li>Security rule audits & permission checks</li>
+            </ul>
+          </article>
         </div>
       </section>
 
-      <section id="experience">
-        <div class="eyebrow">Experience</div>
-        <h2>From business need to working feature.</h2>
-        <div class="timeline">
-          <div class="role"><div class="date">1 year</div><div><h3>Odoo Developer · WATATECH</h3><p>Developed and supported Odoo solutions across versions 18 and 19, translating business requirements into maintainable addons with Python models, ORM behavior, views, workflows, security rules, reports, and integrations.</p></div></div>
-          <div class="role"><div class="date">Full stack</div><div><h3>Backend-first Odoo engineering</h3><p>Comfortable working across the Odoo application stack: data models and business logic first, then XML views, actions, access control, scheduled jobs, QWeb reports, and frontend behavior where the user workflow requires it.</p></div></div>
-          <div class="role"><div class="date">Deployment</div><div><h3>Practical deployment and IT support</h3><p>Entry-level hands-on experience deploying Odoo for local testing and production, running services with Docker, and handling the practical IT tasks that help a startup keep its environments and development workflow moving.</p></div></div>
-          <div class="role"><div class="date">CI/CD</div><div><h3>GitHub Actions automation</h3><p>Built and maintained beginner-friendly CI/CD workflows with GitHub Actions to automate local and production deployment steps and reduce repetitive release work.</p></div></div>
-          <div class="role"><div class="date">Additional</div><div><h3>OWL and AI-assisted development</h3><p>Experience with OWL components, reactive state, templates, services, and web-client integration. Use AI to explore code, generate focused options, improve documentation, and accelerate testing while validating the final result.</p></div></div>
+      <!-- SECTOR 03: EXPERIENCE / OPERATIONAL LOGS -->
+      <section id="experience" class="sector-block" data-sector-id="03" data-sector-name="OPERATIONS">
+        <div class="sector-header-banner">
+          <div>
+            <span class="badge">[ SECTOR 03/06 ]</span>
+            <span style="margin-left: 8px;">// PRODUCTION_HISTORY_LOGS</span>
+          </div>
+          <span class="sector-coord">WATATECH_RECORDS // 2024-2026</span>
+        </div>
+        <h2 class="section-title">Bridging AI Leverage into Working Software.</h2>
+
+        <div class="log-list">
+          <div class="log-row">
+            <div class="log-time">
+              <span>WATATECH</span>
+              <span class="stamp">// 1 YEAR EXP</span>
+            </div>
+            <div class="log-content">
+              <h3>AI-Augmented Software Engineering & Architecture</h3>
+              <p>Pioneered agent-directed workflows across daily engineering tasks at Watatech. Orchestrated LLM subagent pools to rapidly trace complex codebases, synthesize test harnesses, and deliver enterprise-grade Python solutions with verified reliability.</p>
+            </div>
+          </div>
+
+          <div class="log-row">
+            <div class="log-time">
+              <span>AGENTS</span>
+              <span class="stamp">// SUBAGENT_WORKFLOWS</span>
+            </div>
+            <div class="log-content">
+              <h3>Automated Codebase Exploration & Test Generation</h3>
+              <p>Designed and supervised multi-agent pipelines to navigate upstream open-source code, isolate breaking API changes, synthesize comprehensive TransactionCase suites, and draft clear technical specifications for team review.</p>
+            </div>
+          </div>
+
+          <div class="log-row">
+            <div class="log-time">
+              <span>ENTERPRISE</span>
+              <span class="stamp">// SYSTEMS_DELIVERY</span>
+            </div>
+            <div class="log-content">
+              <h3>Enterprise Business Logic & Odoo Systems</h3>
+              <p>Engineered core enterprise business software across versions 18 and 19. Built scalable backend data models, ORM logic, custom security rules, reporting engines, and OWL client interactions backed by relational PostgreSQL foundations.</p>
+            </div>
+          </div>
+
+          <div class="log-row">
+            <div class="log-time">
+              <span>DEVOPS</span>
+              <span class="stamp">// PIPELINES</span>
+            </div>
+            <div class="log-content">
+              <h3>Infrastructure, CI/CD & Production Operations</h3>
+              <p>Deployed containerized test and production environments with Docker, built GitHub Actions CI/CD validation pipelines, and maintained reliable IT operations for development velocity.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="skills">
-        <div class="eyebrow">Toolkit</div>
-        <h2>What I work with.</h2>
-        <div class="tags"><span class="tag">Odoo 18</span><span class="tag">Odoo 19</span><span class="tag">Python</span><span class="tag">Odoo ORM</span><span class="tag">Business workflows</span><span class="tag">Security & access rules</span><span class="tag">XML / QWeb</span><span class="tag">Reports</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span><span class="tag">OWL</span><span class="tag">JavaScript</span><span class="tag">Git</span><span class="tag">IT support</span><span class="tag">AI-assisted development</span></div>
+      <!-- SECTOR 04: SYSTEMS / FOUNDATIONS -->
+      <section id="architecture" class="sector-block" data-sector-id="04" data-sector-name="FOUNDATIONS">
+        <div class="sector-header-banner">
+          <div>
+            <span class="badge">[ SECTOR 04/06 ]</span>
+            <span style="margin-left: 8px;">// CORE_PRINCIPLES</span>
+          </div>
+          <span class="sector-coord">ACADEMIC // HCMUE_CS</span>
+        </div>
+        <h2 class="section-title">Systems First, AI Amplified.</h2>
+        <div class="card-grid">
+          <article class="tactical-card">
+            <span class="card-num">[ FOUNDATION // 01 ]</span>
+            <h3>Computer Science Rigor</h3>
+            <p>Bachelor’s degree in Information Technology from Ho Chi Minh City University of Education (HCMUE). Solid theoretical grounding in data structures, systems architecture, and algorithmic design principles.</p>
+          </article>
+          <article class="tactical-card">
+            <span class="card-num">[ FOUNDATION // 02 ]</span>
+            <h3>Human-in-the-Loop Supervision</h3>
+            <p>AI provides unprecedented leverage only when directed with engineering discipline. I maintain technical accountability for every line: minimal abstractions, deep debugging, and clean architecture.</p>
+          </article>
+          <article class="tactical-card">
+            <span class="card-num">[ FOUNDATION // 03 ]</span>
+            <h3>Reproducible Infrastructure</h3>
+            <p>Every system is built on deterministic scaffolding: containerized Docker stacks, scripted local verification, and automated GitHub Actions CI/CD to eliminate environment drift.</p>
+          </article>
+        </div>
       </section>
 
-      <section id="contact">
-        <div class="eyebrow">Contact</div>
-        <h2>Let’s build something useful.</h2>
-        <p class="lead">Interested in Odoo development, integrations, or thoughtful automation? Send me an email or find me on GitHub and start a conversation.</p>
-        <div class="actions"><a class="button primary" href="mailto:buihoanghieu21122003@gmail.com">buihoanghieu21122003@gmail.com</a><a class="button" href="https://github.com/notHi3u">github.com/notHi3u</a></div>
-        <span class="email-note easter-egg">(no, I will not change this; my mom made it for me)</span>
+      <!-- SECTOR 05: SKILLS / MATRIX -->
+      <section id="matrix" class="sector-block" data-sector-id="05" data-sector-name="TECH_MATRIX">
+        <div class="sector-header-banner">
+          <div>
+            <span class="badge">[ SECTOR 05/06 ]</span>
+            <span style="margin-left: 8px;">// CAPABILITIES_REGISTRY</span>
+          </div>
+          <span class="sector-coord">STACK_REV: 2026.10</span>
+        </div>
+        <h2 class="section-title">What I work with.</h2>
+
+        <div class="matrix-categories">
+          <!-- GROUP 1: AI SYSTEMS & WORKFLOWS -->
+          <div class="matrix-group">
+            <div class="matrix-header">
+              <span>// 01: AI SYSTEMS & AGENTIC WORKFLOWS</span>
+            </div>
+            <div class="tags-matrix">
+              <span class="tag-chip highlight-tech">Multi-Agent Orchestration</span>
+              <span class="tag-chip highlight-tech">Autonomous Subagent Dispatch</span>
+              <span class="tag-chip highlight-tech">Context Architecture & Briefs</span>
+              <span class="tag-chip highlight-tech">Human-in-the-Loop Quality Gates</span>
+              <span class="tag-chip highlight-tech">Automated Test Synthesis</span>
+              <span class="tag-chip highlight-tech">Tool Use & Agentic CLI</span>
+              <span class="tag-chip">Prompt & Evaluation Engineering</span>
+              <span class="tag-chip">AST Code Graph Exploration</span>
+            </div>
+          </div>
+
+          <!-- GROUP 2: SOFTWARE ENGINEERING & ENTERPRISE -->
+          <div class="matrix-group">
+            <div class="matrix-header">
+              <span>// 02: SOFTWARE ENGINEERING & ENTERPRISE SYSTEMS</span>
+            </div>
+            <div class="tags-matrix">
+              <span class="tag-chip highlight-tech">Python 3</span>
+              <span class="tag-chip highlight-tech">Enterprise Systems (Odoo 18/19)</span>
+              <span class="tag-chip highlight-tech">Relational ORM & Data Modeling</span>
+              <span class="tag-chip">PostgreSQL</span>
+              <span class="tag-chip">Security Access & Record Rules</span>
+              <span class="tag-chip">REST / JSON-RPC APIs</span>
+              <span class="tag-chip">JavaScript & OWL Components</span>
+            </div>
+          </div>
+
+          <!-- GROUP 3: DEVOPS & INFRA -->
+          <div class="matrix-group">
+            <div class="matrix-header">
+              <span>// 03: INFRASTRUCTURE & DEPLOYMENT</span>
+            </div>
+            <div class="tags-matrix">
+              <span class="tag-chip">Docker & Containerization</span>
+              <span class="tag-chip">GitHub Actions CI/CD</span>
+              <span class="tag-chip">Git Version Control</span>
+              <span class="tag-chip">Linux Server Administration</span>
+              <span class="tag-chip">Automated Test Frameworks</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTOR 06: CONTACT / COMM LINK -->
+      <section id="contact" class="sector-block" data-sector-id="06" data-sector-name="COMM_LINK">
+        <div class="sector-header-banner">
+          <div>
+            <span class="badge">[ SECTOR 06/06 ]</span>
+            <span style="margin-left: 8px;">// SECURE_COMMUNICATION_LINK</span>
+          </div>
+          <span class="sector-coord">ENC: SHA-256</span>
+        </div>
+        <h2 class="section-title">Let’s build something useful.</h2>
+
+        <div class="contact-panel">
+          <p style="color: var(--text-muted); font-size: 1.15rem; max-width: 680px; margin-bottom: 24px;">
+            Interested in high-velocity AI-assisted engineering, Odoo addon development, or structured automation workflows? Establish direct communication:
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="mailto:buihoanghieu21122003@gmail.com">
+              SEND EMAIL // buihoanghieu21122003@gmail.com
+            </a>
+            <a class="btn" href="https://github.com/notHi3u" target="_blank" rel="noopener">
+              GITHUB // @notHi3u
+            </a>
+          </div>
+          <span class="classified-note" title="Status: Immutable family-authorized comms address">
+            [SYS_MEMO: AUTHORIZED_BY_MOM // NON-NEGOTIABLE PROTOCOL]
+          </span>
+        </div>
+      </section>
+
+      <!-- SECTOR 07: CLASSIFIED REFUEL CHAMBER (HIDDEN FROM RIGHT RAIL MAP) -->
+      <section id="classified-refuel" class="sector-block monster-chamber" data-sector-id="07" data-sector-name="REFUEL_CHAMBER">
+        <div class="sector-header-banner" style="max-width: 680px; width: 100%;">
+          <div>
+            <span class="badge" style="border-color: var(--emerald); color: var(--emerald); background: rgba(0,230,118,0.1);">[ SECTOR 07/06 // UNLISTED ]</span>
+            <span style="margin-left: 8px;">// AUXILIARY_CALORIC_REACTOR</span>
+          </div>
+          <span class="sector-coord">TAURINE + B-COMPLEX // ACTIVE</span>
+        </div>
+
+        <h2 class="section-title" style="margin-bottom: 8px;">ENGINEERING REFUEL CHAMBER</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem; font-family: var(--font-mono); max-width: 620px;">
+          [CLASSIFIED LEVEL-4 SPEC] Continuous AI supervision and late-night architecture sprints require specialized high-octane fuel. Reactor core online.
+        </p>
+
+        <!-- STATIONARY REAL MONSTER ENERGY CAN STAGE WITH RADIATION WAVES -->
+        <div class="monster-stage">
+          <!-- PULSATING RADIATION SHOCKWAVES EMITTING FROM CAN CORE -->
+          <div class="radiation-rings">
+            <div class="rad-ring"></div>
+            <div class="rad-ring"></div>
+            <div class="rad-ring"></div>
+            <div class="rad-ring"></div>
+          </div>
+
+          <div class="monster-can-wrapper" id="monster-can" title="3D Rotating Reactor Core">
+            <!-- REAL ULTRA WHITE CAN (LIGHT MODE) -->
+            <img class="monster-img-face monster-img-white" src="assets/monster_ultra_clean.png" alt="Monster Energy Zero Ultra Can" />
+
+            <!-- REAL ORIGINAL BLACK & NEON GREEN CAN (DARK MODE) -->
+            <img class="monster-img-face monster-img-dark" src="assets/monster_original_clean.png" alt="Monster Energy Original Can" />
+
+            <!-- DYNAMIC PEDESTAL SHADOW -->
+            <div class="can-pedestal-shadow"></div>
+          </div>
+        </div>
+
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase;">
+          <span style="color: var(--cyan);">[STATE: <span id="monster-variant-label">ULTRA WHITE FROSTED</span>]</span> // TOGGLE THEME TO FLIP CAN MATTE
+        </div>
       </section>
     </main>
 
-    <footer><span>© 2026 Bùi Hoàng Hiếu</span><span>Designed for clarity · Built with HTML & CSS <span class="easter-egg" title="iykyk">· GitHub Pages, imirite?</span></span></footer>
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2026 BÙI HOÀNG HIẾU</span>
+      <span>
+        Designed for clarity · <a href="https://github.com/notHi3u/notHi3u.github.io" target="_blank" rel="noopener">Source Code</a> · GitHub Pages
+      </span>
+    </footer>
   </div>
+
+  <!-- SCRIPT: REAL-TIME AUTOMATION SIMULATOR & DOMAIN EXPANSION SYSTEM -->
+  <script>
+    // 1. DYNAMIC MOUSE COORDINATE TRACKER & UTC CLOCK
+    const coordEl = document.getElementById('coord-tracker');
+    window.addEventListener('mousemove', (e) => {
+      if (coordEl) {
+        coordEl.textContent = `POS: [${e.clientX}, ${e.clientY}]`;
+      }
+    });
+
+    const clockEl = document.getElementById('live-clock');
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      if (clockEl) clockEl.textContent = `UTC+7 ${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 2. THEME TRANSITION SYSTEM: WAVES OF FLIPPING TRIANGLES (TOP-LEFT TO BOTTOM-RIGHT)
+    const domainBtn = document.getElementById('domain-toggle');
+    const domainLabel = document.getElementById('domain-label');
+    const domainIcon = document.getElementById('domain-icon');
+    const flipCanvas = document.getElementById('triangle-flip-canvas');
+
+    let currentTheme = localStorage.getItem('portfolio-theme') || 'light';
+    let isTransitioning = false;
+
+    // Palette definition for front/back faces of the triangles
+    const themePalettes = {
+      light: {
+        bg: '#f8f9fa',
+        acc1: '#dc2626', // Crimson Red accent
+        acc2: '#017e84', // Odoo Teal accent
+        wire: 'rgba(18, 21, 27, 0.12)'
+      },
+      dark: {
+        bg: '#12151b',
+        acc1: '#00f0ff', // Rhodes Island Cyan accent
+        acc2: '#00e676', // Reactive Green accent
+        wire: 'rgba(0, 240, 255, 0.22)'
+      }
+    };
+
+    function updateThemeUI(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('portfolio-theme', theme);
+      currentTheme = theme;
+      if (domainLabel && domainIcon) {
+        if (theme === 'dark') {
+          domainLabel.textContent = 'LIGHT MODE';
+          domainIcon.textContent = '○';
+        } else {
+          domainLabel.textContent = 'DARK MODE';
+          domainIcon.textContent = '◐';
+        }
+      }
+
+      // Update rotating Monster Can label
+      const canVariantLabel = document.getElementById('monster-variant-label');
+      if (canVariantLabel) {
+        canVariantLabel.textContent = theme === 'dark' ? 'ORIGINAL BLACK & NEON GREEN' : 'ULTRA WHITE FROSTED';
+      }
+    }
+
+    // Initialize UI without animation
+    updateThemeUI(currentTheme);
+
+    function runTriangleWaveTransition(targetTheme) {
+      if (isTransitioning || !flipCanvas) return;
+      isTransitioning = true;
+
+      const fromTheme = currentTheme;
+      const toTheme = targetTheme;
+      const fromPalette = themePalettes[fromTheme];
+      const toPalette = themePalettes[toTheme];
+
+      const ctx = flipCanvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      flipCanvas.width = w * dpr;
+      flipCanvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
+      flipCanvas.classList.add('active');
+
+      // Grid configuration: cell size ~64px creates crisp, dynamic triangles
+      const cellSize = Math.max(54, Math.min(74, Math.floor(w / 20)));
+      const cols = Math.ceil(w / cellSize) + 1;
+      const rows = Math.ceil(h / cellSize) + 1;
+
+      // Build tessellated triangles
+      // Each square cell [c, r] is sliced diagonally into 2 triangles:
+      // T1 (top-left half) and T2 (bottom-right half)
+      const triangles = [];
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = c * cellSize;
+          const y = r * cellSize;
+          const p1 = [x, y];
+          const p2 = [x + cellSize, y];
+          const p3 = [x + cellSize, y + cellSize];
+          const p4 = [x, y + cellSize];
+
+          // Triangle 1 (top-left): p1, p2, p4
+          const cx1 = (p1[0] + p2[0] + p4[0]) / 3;
+          const cy1 = (p1[1] + p2[1] + p4[1]) / 3;
+          const dist1 = (cx1 + cy1) / (w + h); // normalized diagonal distance 0.0 -> 1.0
+
+          // Triangle 2 (bottom-right): p2, p3, p4
+          const cx2 = (p2[0] + p3[0] + p4[0]) / 3;
+          const cy2 = (p2[1] + p3[1] + p4[1]) / 3;
+          const dist2 = (cx2 + cy2) / (w + h);
+
+          // Deterministic styling variation for visual depth
+          const hash1 = (c * 17 + r * 31) % 10;
+          const hash2 = (c * 23 + r * 29 + 5) % 10;
+
+          triangles.push({
+            p: [p1, p2, p4],
+            cx: cx1, cy: cy1,
+            dist: dist1,
+            type: hash1 === 0 ? 'acc1' : (hash1 === 1 ? 'acc2' : 'bg'),
+            dir: (c + r) % 2 === 0 ? 1 : -1
+          });
+
+          triangles.push({
+            p: [p2, p3, p4],
+            cx: cx2, cy: cy2,
+            dist: dist2,
+            type: hash2 === 0 ? 'acc1' : (hash2 === 1 ? 'acc2' : 'bg'),
+            dir: (c + r) % 2 === 0 ? -1 : 1
+          });
+        }
+      }
+
+      const totalDuration = 950; // ms
+      const startTime = performance.now();
+
+      // Initiate native View Transition so underlying DOM content (backgrounds, cards, text, borders)
+      // seamlessly wipes diagonally from top-left to bottom-right alongside the triangle wave
+      if (document.startViewTransition) {
+        document.startViewTransition(() => {
+          updateThemeUI(toTheme);
+        });
+      } else {
+        // Fallback for browsers without View Transitions
+        setTimeout(() => updateThemeUI(toTheme), 420);
+      }
+
+      function renderFrame(now) {
+        const elapsed = now - startTime;
+        const globalProgress = Math.min(1, elapsed / totalDuration);
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Wave travels diagonally from top-left (dist = 0) to bottom-right (dist = 1)
+        // Active wave window moves forward across normalized distance
+        const waveFront = globalProgress * 1.5; // reaches end at full duration
+        const waveSpan = 0.32; // width of the flipping band
+
+        for (let i = 0; i < triangles.length; i++) {
+          const tri = triangles[i];
+          const localProgress = (waveFront - tri.dist) / waveSpan;
+
+          // Clamp between 0 (not started) and 1 (fully flipped)
+          const p = Math.max(0, Math.min(1, localProgress));
+
+          if (p <= 0 || p >= 1) {
+            // Triangle hasn't started flipping or has already finished flipping and dissolved into the new theme
+            continue;
+          }
+
+          // Flip angle goes from 0 to PI (180 degrees)
+          // Front face is visible for [0 .. PI/2], back face for [PI/2 .. PI]
+          const angle = p * Math.PI;
+          const scale = Math.cos(angle); // 1 -> 0 -> -1
+          const isFlipped = angle > Math.PI / 2;
+
+          const palette = isFlipped ? toPalette : fromPalette;
+          let fillColor = palette.bg;
+          if (tri.type === 'acc1') fillColor = palette.acc1;
+          else if (tri.type === 'acc2') fillColor = palette.acc2;
+
+          ctx.save();
+          ctx.translate(tri.cx, tri.cy);
+
+          // 3D diagonal axis flip transformation
+          // Rotating by -45deg aligns the flip axis with the diagonal wave front
+          ctx.rotate(-Math.PI / 4);
+          ctx.scale(1, Math.abs(scale)); // 3D card tilt foreshortening
+          ctx.rotate(Math.PI / 4);
+
+          // Subtle elevation glow/shadow during mid-flip
+          const shadowAlpha = (1 - Math.abs(scale)) * 0.45;
+          if (shadowAlpha > 0.05) {
+            ctx.shadowColor = toTheme === 'dark' ? 'rgba(0, 240, 255, 0.5)' : 'rgba(0, 0, 0, 0.35)';
+            ctx.shadowBlur = 12 * (1 - Math.abs(scale));
+          }
+
+          ctx.beginPath();
+          ctx.moveTo(tri.p[0][0] - tri.cx, tri.p[0][1] - tri.cy);
+          ctx.lineTo(tri.p[1][0] - tri.cx, tri.p[1][1] - tri.cy);
+          ctx.lineTo(tri.p[2][0] - tri.cx, tri.p[2][1] - tri.cy);
+          ctx.closePath();
+
+          ctx.fillStyle = fillColor;
+          ctx.fill();
+
+          // Delicate tactical perimeter edge
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = palette.wire;
+          ctx.stroke();
+
+          ctx.restore();
+        }
+
+        if (globalProgress < 1) {
+          requestAnimationFrame(renderFrame);
+        } else {
+          // Finished
+          ctx.clearRect(0, 0, w, h);
+          flipCanvas.classList.remove('active');
+          isTransitioning = false;
+        }
+      }
+
+      requestAnimationFrame(renderFrame);
+    }
+
+    domainBtn?.addEventListener('click', () => {
+      const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+      runTriangleWaveTransition(nextTheme);
+    });
+
+    // 3. LIVE STREAMING AUTOMATED TASK RUNNER
+    const sampleLogs = [
+      { tag: 'DISP', type: 'exec', msg: 'orchestrator: parsing objective -> decomposing into 3 specialized subagents' },
+      { tag: 'SPEC', type: 'gate', msg: 'context_architect: compiled brief with explicit file:line anchors & domain rules' },
+      { tag: 'EXEC', type: 'exec', msg: 'subagent_ast: scanning repository call graph [depth=5, 42 symbols resolved]' },
+      { tag: 'TOOL', type: 'exec', msg: 'subagent_code: tool_call -> replace_file_content with deterministic patch' },
+      { tag: 'GATE', type: 'gate', msg: 'eval_gate: verifying static invariants & zero-hallucination constraints -> PASS' },
+      { tag: 'LINT', type: 'gate', msg: 'security_audit: ir.rule & access permission checks -> 0 regressions detected' },
+      { tag: 'TEST', type: 'test', msg: 'subagent_qa: synthesizing edge-case assertions & multi-tenant boundary suite' },
+      { tag: 'TEST', type: 'test', msg: 'runner: TransactionCase & regression suite executed -> 18/18 PASS (46ms)' },
+      { tag: 'DIFF', type: 'gate', msg: 'human-in-the-loop: diff preview staged for human review [0 warnings]' },
+      { tag: 'DOCK', type: 'dock', msg: 'docker compose: ephemeral test instance verified -> ready for git staging' },
+      { tag: 'SYNC', type: 'dock', msg: 'git origin/main: CI pipeline build passed -> commit 8d39f02 validated' },
+      { tag: 'DISP', type: 'exec', msg: 'orchestrator: task graph executed successfully. cluster idle, awaiting next dispatch.' }
+    ];
+
+    const terminalEl = document.getElementById('terminal-stream');
+    const toggleBtn = document.getElementById('btn-toggle-stream');
+    const clearBtn = document.getElementById('btn-clear-stream');
+    let logIndex = 0;
+    let isStreamRunning = true;
+    let streamTimer = null;
+
+    function getTimeString() {
+      const d = new Date();
+      return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`;
+    }
+
+    function addLogEntry(item) {
+      if (!terminalEl) return;
+      const row = document.createElement('div');
+      row.className = 'log-entry';
+      row.innerHTML = `
+        <span class="log-time-code">${getTimeString()}</span>
+        <span class="log-tag ${item.type}">[${item.tag}]</span>
+        <span class="log-msg">${item.msg}</span>
+      `;
+      terminalEl.appendChild(row);
+      terminalEl.scrollTop = terminalEl.scrollHeight;
+
+      if (terminalEl.children.length > 25) {
+        terminalEl.removeChild(terminalEl.firstChild);
+      }
+    }
+
+    for (let i = 0; i < 5; i++) {
+      addLogEntry(sampleLogs[i]);
+    }
+    logIndex = 5;
+
+    function streamStep() {
+      if (!isStreamRunning) return;
+      addLogEntry(sampleLogs[logIndex]);
+      logIndex = (logIndex + 1) % sampleLogs.length;
+      const delay = Math.floor(Math.random() * 1600) + 1200;
+      streamTimer = setTimeout(streamStep, delay);
+    }
+    streamTimer = setTimeout(streamStep, 1500);
+
+    toggleBtn?.addEventListener('click', () => {
+      isStreamRunning = !isStreamRunning;
+      toggleBtn.textContent = isStreamRunning ? 'PAUSE' : 'RESUME';
+      if (isStreamRunning) {
+        streamStep();
+      } else {
+        clearTimeout(streamTimer);
+      }
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      if (terminalEl) terminalEl.innerHTML = '';
+    });
+
+    // 4. SECTOR SCROLL OBSERVER & VERTICAL RAIL PAGER
+    const sectorBlocks = document.querySelectorAll('.sector-block');
+    const railNodes = document.querySelectorAll('.rail-node');
+    const activeSectorTag = document.getElementById('active-sector-tag');
+    const railProgressBar = document.getElementById('rail-progress');
+    const scrollPercentEl = document.getElementById('scroll-percentage');
+
+    const sectorObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sector-in-view');
+          const id = entry.target.id;
+          const num = entry.target.getAttribute('data-sector-id') || '01';
+          const name = entry.target.getAttribute('data-sector-name') || 'OVERVIEW';
+
+          if (activeSectorTag) {
+            activeSectorTag.textContent = `SECTOR [${num}/06] // ${name}`;
+          }
+
+          railNodes.forEach(node => {
+            const nodeTarget = node.getAttribute('data-sector');
+            if (nodeTarget === id) {
+              node.classList.add('active');
+            } else {
+              node.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    sectorBlocks.forEach(block => sectorObserver.observe(block));
+
+    const mainSectorIds = ['top', 'ai-workflow', 'experience', 'architecture', 'matrix', 'contact'];
+
+    function getSectorAnchorScrollY(id) {
+      if (id === 'top') return 0;
+      const el = document.getElementById(id);
+      if (!el) return 0;
+      const rect = el.getBoundingClientRect();
+      // Account for 50px scroll-padding-top
+      return Math.round(rect.top + window.scrollY - 50);
+    }
+
+    function calculateMainSectorProgress() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const positions = mainSectorIds.map(id => getSectorAnchorScrollY(id));
+      const contactTop = positions[positions.length - 1];
+
+      if (scrollTop <= 6) return 0;
+      if (scrollTop >= contactTop - 6) return 100;
+
+      // Snap cleanly to exact 20% intervals when sitting on a sector header
+      for (let i = 0; i < positions.length; i++) {
+        if (Math.abs(scrollTop - positions[i]) <= 8) {
+          return i * 20;
+        }
+      }
+
+      // Smooth linear interpolation between adjacent sectors
+      for (let i = 0; i < positions.length - 1; i++) {
+        const s0 = positions[i];
+        const s1 = positions[i + 1];
+        if (scrollTop >= s0 && scrollTop < s1) {
+          const span = s1 - s0;
+          const localFrac = span > 0 ? (scrollTop - s0) / span : 0;
+          return i * 20 + localFrac * 20;
+        }
+      }
+      return 100;
+    }
+
+    function updateScrollProgress() {
+      const scrollPercent = Math.max(0, Math.min(100, calculateMainSectorProgress()));
+
+      if (railProgressBar) {
+        const wrap = document.querySelector('.rail-track-wrap');
+        const pips = document.querySelectorAll('.rail-pip');
+        if (wrap && pips.length >= 2) {
+          const wrapRect = wrap.getBoundingClientRect();
+          const p0 = pips[0].getBoundingClientRect();
+          const pLast = pips[pips.length - 1].getBoundingClientRect();
+          const topOffset = (p0.top + p0.height / 2) - wrapRect.top;
+          const totalSpan = (pLast.top + pLast.height / 2) - (p0.top + p0.height / 2);
+          
+          railProgressBar.style.top = `${topOffset}px`;
+          const pxHeight = (scrollPercent / 100) * totalSpan;
+          railProgressBar.style.height = `${pxHeight}px`;
+
+          const vertLine = document.querySelector('.rail-vertical-line');
+          if (vertLine) {
+            vertLine.style.top = `${topOffset}px`;
+            vertLine.style.height = `${totalSpan}px`;
+            vertLine.style.bottom = 'auto';
+          }
+        } else {
+          railProgressBar.style.height = `${scrollPercent}%`;
+        }
+      }
+      if (scrollPercentEl) {
+        scrollPercentEl.textContent = `${Math.round(scrollPercent)}%`;
+      }
+    }
+
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('resize', updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // 5. CONTROLLED SECTOR GLIDER (PREVENTS RAPID RUNAWAY SKIPPING)
+    const sectors = Array.from(document.querySelectorAll('.sector-block'));
+    let currentSectorIdx = 0;
+    let isGliding = false;
+
+    // Synchronize active sector index
+    const syncActiveSector = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+          const idx = sectors.indexOf(entry.target);
+          if (idx !== -1 && !isGliding) {
+            currentSectorIdx = idx;
+          }
+        }
+      });
+    }, { threshold: [0.35] });
+    sectors.forEach(s => syncActiveSector.observe(s));
+
+    function glideToSector(idx) {
+      if (idx < 0 || idx >= sectors.length) return;
+      isGliding = true;
+      currentSectorIdx = idx;
+      sectors[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        isGliding = false;
+      }, 950); // 950ms cooldown prevents skipping multiple sections at once
+    }
+
+    // Gentle wheel step
+    window.addEventListener('wheel', (e) => {
+      if (e.target.closest('#terminal-stream')) return;
+      if (Math.abs(e.deltaY) < 18) return;
+
+      e.preventDefault();
+      if (isGliding) return;
+
+      if (e.deltaY > 0) {
+        if (currentSectorIdx < sectors.length - 1) {
+          glideToSector(currentSectorIdx + 1);
+        }
+      } else {
+        if (currentSectorIdx > 0) {
+          glideToSector(currentSectorIdx - 1);
+        }
+      }
+    }, { passive: false });
+
+    // Arrow keys support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        if (currentSectorIdx < sectors.length - 1 && !isGliding) {
+          e.preventDefault();
+          glideToSector(currentSectorIdx + 1);
+        }
+      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        if (currentSectorIdx > 0 && !isGliding) {
+          e.preventDefault();
+          glideToSector(currentSectorIdx - 1);
+        }
+      }
+    });
+
+    // Pager rail clicks
+    railNodes.forEach((node, idx) => {
+      node.addEventListener('click', (e) => {
+        e.preventDefault();
+        glideToSector(idx);
+      });
+    });
+  </script>
 </body>
 </html>
